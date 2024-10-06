@@ -69,19 +69,62 @@ public class Main {
             scanner.next();
         }
         return scanner.nextInt();
-
     }
 
     // Handle Add book
     private static void handleAddBook(){
+        scanner.nextLine();
 
+        System.out.println("Enter book title:");
+        String title = scanner.nextLine().trim();
+
+        System.out.println("Enter book author:");
+        String author = scanner.nextLine().trim();
+
+        // Run checks
+        if (title.isEmpty() || author.isEmpty()){
+            System.out.println("Title and/or author cannot be empty.");
+            return;
+        }
+
+        // Add the book
+        library.addBook(title, author);
     }
     // Handle Remove book
     private static void handleRemoveBook(){
+        System.out.println("Enter the ID of the book to remove:");
+        while(!scanner.hasNextInt()){
+            System.out.println("Invalid input. Enter a valid book ID.");
+            scanner.next();
+        }
 
+        int id = scanner.nextInt();
+        library.removeBook(id);
     }
     // Handle search book
     private static void handleSearchBook(){
+        scanner.nextLine();
 
+        // Prompt the user on them method of search
+        System.out.println("Search by: ");
+        System.out.println("1. Title");
+        System.out.println("2. Author");
+        System.out.println("Enter your choice: ");
+
+        int searchChoice = getUserChoice();
+        switch (searchChoice){
+            case 1:
+                System.out.println("Enter title to search: ");
+                String title = scanner.nextLine().trim();
+                library.searchByTitle(title);
+                break;
+            case 2:
+                System.out.println("Enter Author to search: ");
+                String author = scanner.nextLine().trim();
+                library.searchByAuthor(author);
+                break;
+            default:
+                System.out.println("Invalid Choice!");
+        }
     }
 }

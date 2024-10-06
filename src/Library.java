@@ -42,6 +42,17 @@ public class Library {
         displayBooks(results);
     }
 
+    // Search by Author
+    public void searchByAuthor (String author){
+        List<Book> results = new ArrayList<>();
+        for(Book book: books){
+            if(book.getAuthor().toLowerCase().contains(author.toLowerCase())){
+                results.add(book);
+            }
+        }
+        displayBooks(results);
+    }
+
     // Display all books
     public void displayAllBooks(){
         displayBooks(books);
